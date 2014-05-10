@@ -1,12 +1,12 @@
 package main
 
 import (
-	"./controllers"
-	"./models"
 	"github.com/coopernurse/gorp"
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
 	_ "github.com/mattn/go-sqlite3"
+	"github.com/shogo82148/go-wiki-martini/controllers"
+	"github.com/shogo82148/go-wiki-martini/models"
 )
 
 func main() {
