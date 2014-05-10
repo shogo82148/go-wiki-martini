@@ -21,15 +21,14 @@ func TestNewPost_dbmap(t *testing.T) {
 	body := "hogehoge"
 	page := NewPage(title, body)
 
-	dbmap, err := initTestDb()
+	db, err := initTestDb()
 	if err != nil {
 		t.Errorf("db connection error: %v", err)
 	}
-	dbmap.TruncateTables()
-	dbmap.Insert(page)
+	db.dbmap.TruncateTables()
+	db.dbmap.Insert(page)
 
-	page2 := &Page{}
-	err = dbmap.SelectOne(page2, "select * from pages where id = ?", page.Id)
+	page2, err := db.FindPageByTitle(title)
 	if err != nil {
 		t.Errorf("select error: %v", err)
 	}

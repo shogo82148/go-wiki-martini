@@ -13,8 +13,8 @@ func main() {
 	m := martini.Classic()
 	m.Use(render.Renderer())
 
-	dbmap, _ := models.InitDd("sqlite3", "./db.bin", gorp.SqliteDialect{})
-	m.Map(dbmap)
+	db, _ := models.InitDd("sqlite3", "./db.bin", gorp.SqliteDialect{})
+	m.Map(db)
 
 	m.Get("/", func() string {
 		return "Hello world!!"

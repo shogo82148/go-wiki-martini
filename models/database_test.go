@@ -5,6 +5,6 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
-func initTestDb() (*gorp.DbMap, error) {
+func initTestDb() (*Database, error) {
 	return InitDd("sqlite3", "./tmp_post_db.bin", gorp.SqliteDialect{})
 }

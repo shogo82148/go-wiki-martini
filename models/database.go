@@ -5,7 +5,11 @@ import (
 	"github.com/coopernurse/gorp"
 )
 
-func InitDd(driver string, source string, dialect gorp.Dialect) (*gorp.DbMap, error) {
+type Database struct {
+	dbmap *gorp.DbMap
+}
+
+func InitDd(driver string, source string, dialect gorp.Dialect) (*Database, error) {
 	// create new connection
 	db, err := sql.Open(driver, source)
 	if err != nil {
@@ -22,5 +26,8 @@ func InitDd(driver string, source string, dialect gorp.Dialect) (*gorp.DbMap, er
 		return nil, err
 	}
 
-	return dbmap, nil
+	database := &Database{
+		dbmap: dbmap,
+	}
+	return database, nil
 }

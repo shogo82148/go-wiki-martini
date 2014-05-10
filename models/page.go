@@ -12,3 +12,12 @@ func NewPage(title, body string) *Page {
 		Body:  body,
 	}
 }
+
+func (db *Database) FindPageByTitle(title string) (*Page, error) {
+	page := &Page{}
+	err := db.dbmap.SelectOne(page, "select * from pages where title = ?", title)
+	if err != nil {
+		return nil, err
+	}
+	return page, nil
+}

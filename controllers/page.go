@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"github.com/coopernurse/gorp"
 	"github.com/go-martini/martini"
 	"github.com/martini-contrib/render"
 	"github.com/russross/blackfriday"
@@ -9,9 +8,8 @@ import (
 	"html/template"
 )
 
-func ShowPage(r render.Render, dbmap *gorp.DbMap, params martini.Params) {
-	page := &models.Page{}
-	dbmap.SelectOne(page, "select * from pages where title = ?", params["title"])
+func ShowPage(r render.Render, db *models.Database, params martini.Params) {
+	page, _ := db.FindPageByTitle(params["title"])
 	body := blackfriday.MarkdownBasic([]byte(page.Body))
 	r.HTML(200, "show", struct {
 		Title string
