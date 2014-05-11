@@ -19,7 +19,9 @@ func main() {
 	m.Get("/", func() string {
 		return "Hello world!!"
 	})
-	m.Get("/:title", controllers.ShowPage)
+	m.Get("/pages/:title", controllers.ShowPage)
+	m.Get("/create", controllers.CreatePage)
+	m.Post("/save_new", controllers.SaveNewPage)
 
 	m.Run()
 }

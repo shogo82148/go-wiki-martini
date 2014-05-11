@@ -13,6 +13,10 @@ func NewPage(title, body string) *Page {
 	}
 }
 
+func (db *Database) InsertPage(page *Page) error {
+	return db.dbmap.Insert(page)
+}
+
 func (db *Database) FindPageByTitle(title string) (*Page, error) {
 	page := &Page{}
 	err := db.dbmap.SelectOne(page, "select * from pages where title = ?", title)
